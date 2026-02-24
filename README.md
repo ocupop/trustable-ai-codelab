@@ -1,6 +1,6 @@
-# racing-coach-codelab
+# trustable-ai-codelab
 
-# Racing Coach Codelab Info
+# Trustable AI Codelab Info (racing coach)
 
 - Shared Folder (Google Docs): https://drive.google.com/drive/folders/1q-u12zJnC8P5O63uRwfWhbmGDsNXPwed
 - Owner: 
@@ -12,3 +12,12 @@
 	- Do not edit the generated index.md files in each Step folder
 	- The Google docs source of those MD files are in the shared folder
 
+- Steps:
+Introduction and Overview
+Project Setup
+Virtual Racetrack App
+Building the Reasoning Path
+Building the Reflexive Path
+Finetuning the Model
+Challenges
+Conclusion
