@@ -8,8 +8,8 @@
 - Last reviewed: 20260217
 - Notes:
 	- This repo contains the code for the Trustable AI codelab
-	- Koru repo - A Racing Coach that implements Trustable AI principles
-	- Streaming Telemetry Server repo - A stream of simulated telemetry data that represents racing car data
+		- Koru repo - A Racing Coach that implements Trustable AI principles
+		- Streaming Telemetry Server repo - A stream of simulated telemetry data that represents racing car data
 	- Each step of the repo contains the generated MD files for that step
 	- Do not edit the generated index.md files in each Step folder
 	- The Google docs source of those MD files are in the shared folder
