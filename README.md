@@ -1,13 +1,15 @@
 # trustable-ai-codelab
 
-# Trustable AI Codelab Info (racing coach)
+# Trustable AI 
 
 - Shared Folder (Google Docs): https://drive.google.com/drive/folders/1q-u12zJnC8P5O63uRwfWhbmGDsNXPwed
 - Owner: 
 - Status: DRAFT
 - Last reviewed: 20260217
 - Notes:
-	- This repo contains the codelab (steps and assets) for the Racing Coach
+	- This repo contains the code for the Trustable AI codelab
+	- Koru repo - A Racing Coach that implements Trustable AI principles
+	- Streaming Telemetry Server - A stream of simulated telemetry data that represents racing car data
 	- Each step of the repo contains the generated MD files for that step
 	- Do not edit the generated index.md files in each Step folder
 	- The Google docs source of those MD files are in the shared folder
