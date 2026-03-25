@@ -1,6 +1,6 @@
 # trustable-ai-codelab
 
-# Trustable AI 
+# Building Trustable AI at 100 MPH 
 
 - Shared Folder (Google Docs): https://drive.google.com/drive/folders/1q-u12zJnC8P5O63uRwfWhbmGDsNXPwed
 - Owner: 
@@ -19,10 +19,11 @@
 2. What You Will Need
 3. Why Trustable AI Matters
 4. Understanding High-Velocity AI and Split-Brain Architecture
-5. Build the Telemetry Stream
-6. Prepare Telemetry for AI Reasoning
-7. Add Guardrails and Encoded Human Expertise
-8. Design the Coaching Persona and User Experience
-9. Review the End-to-End Architecture
-10. Challenges
-11. Wrap Up and Next Steps
+5. Building a Telemetry Streaming Server
+6. Build the Racing Car Simulator
+7. Prepare Telemetry for AI Reasoning
+8. Add Guardrails and Encoded Human Expertise
+9. Design the Coaching Persona and User Experience
+10. Review the End-to-End Architecture
+11. Challenges
+12. Wrap Up and Next Steps
