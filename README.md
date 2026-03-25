@@ -13,8 +13,10 @@
 	- Each step of the repo contains the generated MD files for that step
 	- Do not edit the generated index.md files in each Step folder
 	- The Google docs source of those MD files are in the shared folder
+	- Follow the instructions in the codelab to build and run both components of the application.
 
 - Steps:
+
 1. Overview
 2. What You Will Need
 3. Why Trustable AI Matters
