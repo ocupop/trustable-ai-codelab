@@ -71,6 +71,8 @@ export class AudioService {
 
   /** Speak arbitrary text with Web Speech API */
   speak(text: string) {
+    // 🔊 PROBE 5 — audio output (end of pipeline):
+    // console.log('🔊 SPEAK', { chars: text.length, preview: text.slice(0, 60) });
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 1.2;

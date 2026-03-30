@@ -3,12 +3,30 @@ import { GoogleGenAI, Modality } from '@google/genai';
 import { convertToWav } from '../utils/audioUtils';
 import type { TTSProvider } from '../types';
 
+// Gemini prebuilt voice per persona
+const PERSONA_GEMINI_VOICE: Record<string, string> = {
+  aj:      'Fenrir',   // assertive, clipped male
+  rachel:  'Kore',     // calm, precise female
+  tony:    'Puck',     // upbeat, energetic
+  garmin:  'Charon',   // neutral, flat
+  superaj: 'Zephyr',   // balanced, adaptive
+};
+
+// Browser TTS tuning per persona
+const PERSONA_BROWSER_CONFIG: Record<string, { rate: number; pitch: number }> = {
+  aj:      { rate: 1.3, pitch: 0.7 },  // fast, low — blunt commands
+  rachel:  { rate: 1.0, pitch: 1.1 },  // measured, slightly higher — clinical
+  tony:    { rate: 1.4, pitch: 1.3 },  // fast, high — hype energy
+  garmin:  { rate: 0.9, pitch: 0.6 },  // slow, flat — robotic data readout
+  superaj: { rate: 1.1, pitch: 0.9 },  // default
+};
+
 interface TTSState {
   provider: TTSProvider;
   isSpeaking: boolean;
 }
 
-export const useTTS = (apiKey: string | null) => {
+export const useTTS = (apiKey: string | null, coachId: string = 'superaj') => {
   const [state, setState] = useState<TTSState>({ provider: 'browser', isSpeaking: false });
   const isFetchingRef = useRef(false);
 
@@ -22,111 +40,50 @@ export const useTTS = (apiKey: string | null) => {
     setState(prev => ({ ...prev, isSpeaking: true }));
     isFetchingRef.current = true;
 
+    const voice = PERSONA_GEMINI_VOICE[coachId] ?? 'Zephyr';
+    const browserConfig = PERSONA_BROWSER_CONFIG[coachId] ?? { rate: 1.1, pitch: 0.9 };
+
     try {
-      switch (state.provider) {
-        case 'browser':
-          await speakBrowser(text);
-          break;
-        case 'google':
-          await speakGoogleCloud(text, apiKey);
-          break;
-        case 'gemini-flash':
-          await speakGeminiFlash(text, apiKey);
-          break;
-        case 'gemini-pro':
-          await speakGeminiPro(text, apiKey);
-          break;
+      if (state.provider === 'gemini') {
+        await speakGemini(text, apiKey, voice);
+      } else {
+        await speakBrowser(text, browserConfig);
       }
     } catch (err) {
-      console.error('TTS error:', err);
-      // Fallback to browser
-      await speakBrowser(text);
+      console.error('TTS error, falling back to browser:', err);
+      await speakBrowser(text, browserConfig);
     } finally {
       isFetchingRef.current = false;
       setState(prev => ({ ...prev, isSpeaking: false }));
     }
-  }, [state.provider, apiKey]);
+  }, [state.provider, apiKey, coachId]);
 
   return { ...state, setProvider, speak };
 };
 
 // ── Provider implementations ────────────────────────────────
 
-function speakBrowser(text: string): Promise<void> {
+function speakBrowser(text: string, config: { rate: number; pitch: number }): Promise<void> {
   return new Promise(resolve => {
     if (!('speechSynthesis' in window)) { resolve(); return; }
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.1;
-    utterance.pitch = 0.9;
+    utterance.rate = config.rate;
+    utterance.pitch = config.pitch;
     utterance.onend = () => resolve();
     utterance.onerror = () => resolve();
     speechSynthesis.speak(utterance);
   });
 }
 
-async function speakGoogleCloud(text: string, apiKey: string | null): Promise<void> {
+async function speakGemini(text: string, apiKey: string | null, voice: string): Promise<void> {
   if (!apiKey) throw new Error('API key required');
-  const res = await fetch(
-    `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        input: { text },
-        voice: { languageCode: 'en-US', name: 'en-US-Journey-F' },
-        audioConfig: { audioEncoding: 'MP3' },
-      }),
-    }
-  );
-  if (!res.ok) throw new Error('Google TTS failed');
-  const data = await res.json();
-  await playBase64Audio(data.audioContent, 'audio/mp3');
-}
-
-async function speakGeminiFlash(text: string, apiKey: string | null): Promise<void> {
-  if (!apiKey) throw new Error('API key required');
-  const client = new GoogleGenAI({ apiKey, httpOptions: { apiVersion: 'v1alpha' } });
-  const session = await client.live.connect({
-    model: 'models/gemini-2.0-flash-exp',
-    config: {
-      responseModalities: [Modality.AUDIO],
-      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } } },
-    },
-  });
-
-  const audioParts: string[] = [];
-  let audioMimeType = '';
-
-  session.onmessage = (msg: any) => {
-    const part = msg?.serverContent?.modelTurn?.parts?.[0];
-    if (part?.inlineData) {
-      audioParts.push(part.inlineData.data || '');
-      if (!audioMimeType && part.inlineData.mimeType) audioMimeType = part.inlineData.mimeType;
-    }
-  };
-
-  await session.sendClientContent({ turns: [{ role: 'user', parts: [{ text }] }] });
-
-  // Wait for audio
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  session.close();
-
-  if (audioParts.length > 0) {
-    const wavBuffer = convertToWav(audioParts, audioMimeType || 'audio/pcm; rate=24000');
-    const blob = new Blob([wavBuffer], { type: 'audio/wav' });
-    await playBlobAudio(blob);
-  }
-}
-
-async function speakGeminiPro(text: string, apiKey: string | null): Promise<void> {
-  if (!apiKey) throw new Error('API key required');
-  const client = new GoogleGenAI({ apiKey, httpOptions: { apiVersion: 'v1alpha' } });
+  const client = new GoogleGenAI({ apiKey });
 
   const response = await client.models.generateContentStream({
     model: 'models/gemini-2.5-pro-preview-tts',
     config: {
       responseModalities: [Modality.AUDIO],
-      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Fenrir' } } },
+      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
     },
     contents: [{ role: 'user', parts: [{ text: `Read aloud verbatim: "${text}"` }] }],
   });
@@ -143,21 +100,13 @@ async function speakGeminiPro(text: string, apiKey: string | null): Promise<void
   }
 
   if (audioParts.length > 0) {
-    const wavBuffer = convertToWav(audioParts, audioMimeType || 'audio/pcm; rate=24000');
-    const blob = new Blob([wavBuffer], { type: 'audio/wav' });
+    const wavBuffer = convertToWav(audioParts as unknown as string[], audioMimeType || 'audio/pcm; rate=24000');
+    const blob = new Blob([wavBuffer as unknown as BlobPart], { type: 'audio/wav' });
     await playBlobAudio(blob);
   }
 }
 
 // ── Playback helpers ────────────────────────────────────────
-
-async function playBase64Audio(b64: string, mimeType: string): Promise<void> {
-  const binary = atob(b64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  const blob = new Blob([bytes], { type: mimeType });
-  await playBlobAudio(blob);
-}
 
 function playBlobAudio(blob: Blob): Promise<void> {
   return new Promise((resolve, reject) => {

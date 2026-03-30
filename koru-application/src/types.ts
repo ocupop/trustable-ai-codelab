@@ -106,6 +106,6 @@ export type CoachAction =
 
 export type SSEConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 'error';
 
-export type TTSProvider = 'browser' | 'google' | 'gemini-flash' | 'gemini-pro';
+export type TTSProvider = 'browser' | 'gemini';
 
 export type CloudModel = 'flash' | 'pro';

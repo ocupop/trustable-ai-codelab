@@ -29,7 +29,7 @@ export default function Replay({ apiKey }: ReplayProps) {
   const [analysisResult, setAnalysisResult] = useState('');
 
   const { generateFeedback, status: cloudStatus } = useGeminiCloud();
-  const { speak, setProvider, provider, isSpeaking } = useTTS(apiKey);
+  const { speak, setProvider, provider, isSpeaking } = useTTS(apiKey, activeCoach);
   const { analyzeLap, checkLookahead } = usePredictiveCoaching();
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -175,9 +175,7 @@ export default function Replay({ apiKey }: ReplayProps) {
             onChange={e => setProvider(e.target.value as TTSProvider)}
           >
             <option value="browser">Browser TTS</option>
-            <option value="google">Google TTS</option>
-            <option value="gemini-flash">Gemini Flash</option>
-            <option value="gemini-pro">Gemini Pro</option>
+            <option value="gemini">Gemini TTS</option>
           </select>
         </div>
       </header>
