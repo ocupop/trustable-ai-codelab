@@ -116,11 +116,11 @@ def load_track_data(filepath: str):
     data = []
     try:
         # Resolve path relative to this script if needed, or assume absolute/cwd
-        # The user said VBOX0240.csv is in the root, so one level up from backend/
+        # The user said SampleStream2024.csv is in the root, so one level up from backend/
         if not os.path.exists(filepath):
              # Try determining path relative to script location
              script_dir = os.path.dirname(os.path.abspath(__file__))
-             filepath = os.path.join(script_dir, "..", "VBOX0240.csv")
+             filepath = os.path.join(script_dir, "..", "SampleStream2024.csv")
 
         if not os.path.exists(filepath):
             logger.error(f"CSV file not found at {filepath}")
@@ -182,7 +182,7 @@ async def mock_gps_generator(mode: str = "nmea"):
     logger.info(f"Starting Mock GPS Generator in {mode} mode")
     
     # Load data once
-    mock_settings["track_data"] = load_track_data("VBOX0240.csv")
+    mock_settings["track_data"] = load_track_data("SampleStream2024.csv")
     
     if not mock_settings["track_data"]:
         logger.warning("No track data loaded. Falling back to static point.")

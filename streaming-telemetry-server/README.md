@@ -9,6 +9,9 @@ Python **FastAPI** service that simulates or streams **GPS data** over **Server-
 
 Clients (browsers, other services) subscribe to the SSE endpoint and receive live updates.
 
+If you are interested in running a simulated GPS telemetry stream as part of the "Trustable AI at 100 MPH" codelab, please follow the instructions in that codelab.
+If you are interested in reading GPS telemetry from an actual car's GPS receiver, follow the instructions in this README.
+
 ## Setup
 
 1. Go to this directory: `cd streaming-telemetry`
