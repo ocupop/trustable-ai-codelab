@@ -285,7 +285,7 @@ You should see incoming streamed data in the cloud shell window.
 
 We will use this telemetry data to simulate the data emitted by sensors in a racing car.  The rest of the codelab will use this data.  You can terminate the curl program by entering CTRL-C in the terminal window.
 
-## What You Should Notice
+### What You Should Notice
 
 As you complete this section, pay attention to the nature of the incoming data. Raw telemetry is often high-volume, time-sensitive, and not immediately suitable for AI reasoning.  Once we build the front-end application, we will need to filter the raw data into an efficient format that an LLM can process quickly.  
 
