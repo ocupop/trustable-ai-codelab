@@ -9,7 +9,7 @@ keywords: docType:Codelab,product:ArtifactRegistry,product:ComputeEngine,product
 ---
 # Building Trustable AI at 100 MPH
 
-# Step 1 \- Overview
+## Step 1 \- Overview
 
 Artificial intelligence is now part of many software systems, but building an AI application is not the same as building one that users can trust. In many real-world environments, the challenge is not simply generating a response. The challenge is generating a response that is timely, grounded, actionable, and aligned with human expertise.
 
@@ -17,7 +17,7 @@ In this codelab, you will build a racing coach simulator that demonstrates these
 
 You will work with a high-velocity stream of telemetry data, transform it into a form that is useful and efficient for AI reasoning, and combine LLM-based output with encoded human guidance to produce more trustworthy responses.
 
-## What you will build
+### What you will build
 
 In this codelab, you will build a trustable AI prototype that:
 
@@ -28,7 +28,7 @@ In this codelab, you will build a trustable AI prototype that:
 * Combines Model Output With Encoded Human Guidance And Safety Rules  
 * Delivers Coaching Feedback Through A User-Facing Interface
 
-## What you will learn
+### What you will learn
 
 By the end of this codelab, you will be able to:
 
@@ -39,11 +39,11 @@ By the end of this codelab, you will be able to:
 * Apply Guardrails And Human-Guided Rules To Improve Trust  
 * Evaluate How This Architecture Can Be Applied To Other Domains
 
-# Step 2 \- What You Will Need
+## Step 2 \- What You Will Need
 
 Before you begin, make sure you have the required accounts, tools, and services ready.
 
-## Prerequisites
+### Prerequisites
 
 You should have:
 
@@ -56,11 +56,11 @@ Gemini is Google's AI model built on a foundation of state-of-the-art reasoning 
 
 ![Gemini](img/gemini.jpeg)
 
-## Obtaining Credits to Use Google Cloud
+### Obtaining Credits to Use Google Cloud
 
 To claim your credits, visit this [link](https://trygcp.dev/claim/trustable-ai-codelab#vf=8sw) and log in with a Gmail email address ([gmail.com](http://gmail.com) domain).  Then, accept the credits into your Google Cloud Platform (GCP) billing account, and they will be applied to your account.
 
-# Step 3 \- Why Trustable AI Matters
+## Step 3 \- Why Trustable AI Matters
 
 Many AI systems can produce fluent and convincing responses, but fluent is not the same as trustworthy. In real-world systems, users often need timely, grounded responses that are constrained by safety rules and shaped by domain expertise.
 
@@ -100,7 +100,7 @@ Rather than treating the LLM as the entire system, you need to treat it as one p
 
 Now, let’s understand how to create such an architecture.
 
-# Step 4 \- Understanding High-Velocity AI and Modular Trusted Architecture
+## Step 4 \- Understanding High-Velocity AI and Modular Trusted Architecture
 
 Some AI systems need very different kinds of behavior. They must react quickly to changing conditions and also support slower, more thoughtful reasoning.
 
@@ -144,19 +144,19 @@ Why do you think it is useful to keep this logic separated?
 
 Now, let’s build a fun, multi-part application and see how this architecture turns fast reactions and deeper reasoning into a trustable AI system you can actually experience.
 
-# Step 5 \- Build a Telemetry Streaming Server
+## Step 5 \- Build a Telemetry Streaming Server
 
 Now that you understand the architectural goal, it is time to build the data pipeline that drives the application.
 
 In this section, you will create a simple telemetry stream for a virtual race car. The data will come from a CSV source containing GPS or track-position data, and your application will convert it into a live stream that the UI and the AI layer can consume.
 
-## In this section, you will:
+### In this section, you will:
 
 * Create a new project in Google Cloud for our streaming server and application  
 * Create a small server to emit telemetry data  
 * Stream those events to a browser UI or console
 
-## 1\. Open Cloud Shell
+### 1\. Open Cloud Shell
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com).  
 2. Create a new project for this codelab.  Click on the project dropdown menu at the top.
@@ -197,7 +197,7 @@ Keep your API keys out of your source code and never commit them to Git reposito
 
 ---
 
-## 2\. Get the code
+### 2\. Get the code
 
 Clone the master repo.
 
@@ -210,7 +210,7 @@ Notice that there are two folders in this repo: “koru-application” (web appl
 
 ---
 
-## 3\. Enable required APIs
+### 3\. Enable required APIs
 
 Run *once* per project:
 
@@ -232,7 +232,7 @@ You can find YOUR\_PROJECT\_ID in the list of Projects
 
 ---
 
-## 4\. Deploy the backend to Cloud Run
+### 4\. Deploy the backend to Cloud Run
 
 From the repo root (ie, make sure you are in the `trustable-ai-codelab` folder):
 
@@ -243,7 +243,7 @@ gcloud run deploy streaming-telemetry-server \
   --region us-central1 \
   --allow-unauthenticated
 
-## Note you may have to press 'Y' when prompted
+Note you may have to press 'Y' when prompted
 ```
 
 - The first run may prompt you to enable APIs or create an Artifact Registry repo; accept as needed.  
@@ -252,7 +252,7 @@ gcloud run deploy streaming-telemetry-server \
 
 ---
 
-## 5\. Use the stream URL
+### 5\. Use the stream URL
 
 The telemetry server is now emitting simulated telemetry data using Server-Sent-Events (SSE) at an endpoint of the form :
 
@@ -291,9 +291,9 @@ As you complete this section, pay attention to the nature of the incoming data. 
 
 But first, let’s build the web front-end to visualize the data.
 
-# Step 6 \- Build the Racing Car Simulator
+## Step 6 \- Build the Racing Car Simulator
 
-## In this section, you will:
+### In this section, you will:
 
 * Build a racing car simulation   
 * Connect the telemetry server to the racing car web application  
@@ -426,7 +426,7 @@ You should also begin thinking about safety and trust here. Even well-prepared i
 
 Data preparation is not just a preprocessing step. It is a critical part of the trust strategy. Cleaner inputs often lead to more focused, more reliable outputs.
 
-# Step 8 \- Add Guardrails and Encoded Human Expertise
+## Step 8 \- Add Guardrails and Encoded Human Expertise
 
 A trustable AI system should not rely on model output alone. In many cases, the most reliable systems combine large language model reasoning with explicit rules, domain knowledge, and human-guided constraints.
 
@@ -482,7 +482,7 @@ This step is a critical aspect of a trustable AI system. Trust is not magically 
 
 The LLM is part of the solution, but it is not the whole solution. Trust improves when AI output is guided by explicit human knowledge.
 
-# Step 9 \- Design the Coaching Personas and User Experience
+## Step 9 \- Design the Coaching Personas and User Experience
 
 Once your reasoning pipeline is in place, the next question is how the system should communicate with the user.
 
@@ -538,7 +538,7 @@ In a production environment, you would typically assign distinct voices to each 
 ```
 
 
-# Step 10 \- Review the End-to-End Architecture
+## Step 10 \- Review the End-to-End Architecture
 
 At this point, you have built the major pieces of the system. Now it is time to step back and review how they work together.
 
@@ -602,7 +602,7 @@ Notice we have connected the various technical components to provide the larger 
 
 Trustable AI is an architectural outcome, not a single feature.
 
-## Tear down (removing the service)
+### Tear down (removing the service)
 
 It is important to remember to remove the service when you no longer need it.  Once you are done testing the telemetry server along with the application, you should delete the Cloud Run service and stop billing for it:
 
@@ -622,7 +622,7 @@ Optional:  Your container images, packages, and related artifacts are stored in 
 # 
 
 
-# Step 11 \- Challenges
+## Step 11 \- Challenges
 
 Now that the core application is working and you understand the various components, try extending the design.
 
@@ -636,7 +636,7 @@ Suggested challenges
 These challenges encourage you to think beyond the racing example and recognize the broader design pattern of trustability behind this codelab.
 
 
-# Step 12 \- Wrap Up and Next Steps
+## Step 12 \- Wrap Up and Next Steps
 
 In this codelab, you built more than a racing demo. You built a concrete example of how trustable AI systems can be designed.
 
