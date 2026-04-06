@@ -9,7 +9,7 @@ keywords: docType:Codelab,product:ArtifactRegistry,product:ComputeEngine,product
 ---
 # Building Trustable AI at 100 MPH
 
-## Step 1 \- Overview
+## Overview
 
 Artificial intelligence is now part of many software systems, but building an AI application is not the same as building one that users can trust. In many real-world environments, the challenge is not simply generating a response. The challenge is generating a response that is timely, grounded, actionable, and aligned with human expertise.
 
@@ -39,7 +39,7 @@ By the end of this codelab, you will be able to:
 * Apply Guardrails And Human-Guided Rules To Improve Trust  
 * Evaluate How This Architecture Can Be Applied To Other Domains
 
-## Step 2 \- What You Will Need
+## What You Will Need
 
 Before you begin, make sure you have the required accounts, tools, and services ready.
 
@@ -60,7 +60,7 @@ Gemini is Google's AI model built on a foundation of state-of-the-art reasoning 
 
 To claim your credits, visit this [link](https://trygcp.dev/claim/trustable-ai-codelab#vf=8sw) and log in with a Gmail email address ([gmail.com](http://gmail.com) domain).  Then, accept the credits into your Google Cloud Platform (GCP) billing account, and they will be applied to your account.
 
-## Step 3 \- Why Trustable AI Matters
+## Why Trustable AI Matters
 
 Many AI systems can produce fluent and convincing responses, but fluent is not the same as trustworthy. In real-world systems, users often need timely, grounded responses that are constrained by safety rules and shaped by domain expertise.
 
@@ -100,7 +100,7 @@ Rather than treating the LLM as the entire system, you need to treat it as one p
 
 Now, let’s understand how to create such an architecture.
 
-## Step 4 \- Understanding High-Velocity AI and Modular Trusted Architecture
+## Understanding High-Velocity AI and Modular Trusted Architecture
 
 Some AI systems need very different kinds of behavior. They must react quickly to changing conditions and also support slower, more thoughtful reasoning.
 
@@ -144,7 +144,7 @@ Why do you think it is useful to keep this logic separated?
 
 Now, let’s build a fun, multi-part application and see how this architecture turns fast reactions and deeper reasoning into a trustable AI system you can actually experience.
 
-## Step 5 \- Build a Telemetry Streaming Server
+## Build a Telemetry Streaming Server
 
 Now that you understand the architectural goal, it is time to build the data pipeline that drives the application.
 
@@ -291,7 +291,7 @@ As you complete this section, pay attention to the nature of the incoming data. 
 
 But first, let’s build the web front-end to visualize the data.
 
-## Step 6 \- Build the Racing Car Simulator
+## Build the Racing Car Simulator
 
 ### In this section, you will:
 
@@ -320,7 +320,7 @@ npm run dev
 > aside positive
 “koru” is a symbol from the [Māori culture](https://en.wikipedia.org/wiki/Koru) in New Zealand.  It represents a new beginning. 
 ```
-!VITE[](img/vite.png)
+![VITE](img/vite.png)
 
 In Chrome, open the port on your local machine ([http://localhost:5173](http://localhost:5173) as in the example above). You'll see the landing page for the “AI Motorsport Coaching” application. 
 
@@ -360,7 +360,7 @@ If your speaker volume is turned up, you can hear the car racing advice from dif
 
 Now that we have a working application, let’s explore how we prepared the data for efficient processing by the LLM and how we can add additional features to enhance the trustability of the overall system.
 
-# Step 7 \- Prepare Telemetry for AI Reasoning
+## Prepare Telemetry for AI Reasoning
 
 Raw telemetry is useful for simulation, but it is usually too detailed and too frequent to be sent directly to an LLM. If you send all the telemetry data unchanged, you may increase latency, introduce noise, and reduce the quality of the resulting guidance.
 
@@ -426,7 +426,7 @@ You should also begin thinking about safety and trust here. Even well-prepared i
 
 Data preparation is not just a preprocessing step. It is a critical part of the trust strategy. Cleaner inputs often lead to more focused, more reliable outputs.
 
-## Step 8 \- Add Guardrails and Encoded Human Expertise
+## Add Guardrails and Encoded Human Expertise
 
 A trustable AI system should not rely on model output alone. In many cases, the most reliable systems combine large language model reasoning with explicit rules, domain knowledge, and human-guided constraints.
 
@@ -482,7 +482,7 @@ This step is a critical aspect of a trustable AI system. Trust is not magically 
 
 The LLM is part of the solution, but it is not the whole solution. Trust improves when AI output is guided by explicit human knowledge.
 
-## Step 9 \- Design the Coaching Personas and User Experience
+## Design the Coaching Personas and User Experience
 
 Once your reasoning pipeline is in place, the next question is how the system should communicate with the user.
 
@@ -538,7 +538,7 @@ In a production environment, you would typically assign distinct voices to each 
 ```
 
 
-## Step 10 \- Review the End-to-End Architecture
+## Review the End-to-End Architecture
 
 At this point, you have built the major pieces of the system. Now it is time to step back and review how they work together.
 
@@ -622,7 +622,7 @@ Optional:  Your container images, packages, and related artifacts are stored in 
 # 
 
 
-## Step 11 \- Challenges
+## Challenges
 
 Now that the core application is working and you understand the various components, try extending the design.
 
@@ -636,7 +636,7 @@ Suggested challenges
 These challenges encourage you to think beyond the racing example and recognize the broader design pattern of trustability behind this codelab.
 
 
-## Step 12 \- Wrap Up and Next Steps
+## Wrap Up and Next Steps
 
 In this codelab, you built more than a racing demo. You built a concrete example of how trustable AI systems can be designed.
 
