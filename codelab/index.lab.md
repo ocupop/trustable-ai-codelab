@@ -116,26 +116,30 @@ This architectural separation helps the system remain responsive while still sup
 
 In this small program, we have a reflex path and a strategy path implemented as Python functions.
 
-```python
-telemetry = {				# The data
-	"speed": 147,
-	"grip": 0.68,
-	"corner_type": "sharp",
-	"lap_trend": "entering_corners_too_fast"
+```ts
+const telemetry = {
+  speed: 147,
+  grip: 0.68,
+  corner_type: "sharp",
+  lap_trend: "entering_corners_too_fast",
+};
+
+function reflexPath(event: typeof telemetry): string {
+  if (event.grip < 0.70) {
+    return "REFLEX: Reduce throttle now";
+  }
+  return "REFLEX: No urgent issue";
 }
 
-def reflex_path(event):		# Fast, immediate decision
-  if event["grip"] < 0.70:
-	return "REFLEX: Reduce throttle now"
-return "REFLEX: No urgent issue"
+function strategyPath(event: typeof telemetry): string {
+  if (event.lap_trend === "entering_corners_too_fast") {
+    return "STRATEGY: Brake earlier and prioritize corner exit";
+  }
+  return "STRATEGY: Driving pattern looks stable";
+}
 
-def strategy_path(event):		# Slower, broader interpretation
-  if event["lap_trend"] == "entering_corners_too_fast":
-	return "STRATEGY: Brake earlier and prioritize corner exit"
-return "STRATEGY: Driving pattern looks stable"
-
-print(reflex_path(telemetry))	# Same telemetry data 
-print(strategy_path(telemetry))	# Same telemetry data
+console.log(reflexPath(telemetry));
+console.log(strategyPath(telemetry));
 ```
 
 The two functions behave differently given the same telemetry data.  The reflex function is an immediate warning.  The strategy function gives us coaching advice based on rules.
@@ -243,8 +247,8 @@ gcloud run deploy streaming-telemetry-server \
   --region us-central1 \
   --allow-unauthenticated
 
-Note you may have to press 'Y' when prompted
 ```
+Note you may have to press 'Y' when prompted
 
 - The first run may prompt you to enable APIs or create an Artifact Registry repo; accept as needed.  
 - If you use a different region than `us-central1`, specify that region using `--region`  
