@@ -185,8 +185,13 @@ C. Obtaining a Gemini API key
    Within Vertex AI Studio, click on “Get API key” in the bottom left corner above “Documentation”. Create an API key for Gemini (it looks like a long string of seemingly random characters).  Save this key in a secure location.  We will use this API key in Step 6 “Build the Racing Car Simulator” to authenticate our access to Gemini in Google Cloud.
 
 
-> aside positive 
+<table>
+  <tr>
+    <td style="background-color: #e0ffe0;">
 Keep your API keys out of your source code and never commit them to Git repositories. It is recommended to store them either in environment variables or a secure secrets manager.  Treat API keys like passwords: do not share them in chats, email, screenshots, or logs.  Rotate them regularly. For production systems, you should add monitoring and usage alerts to quickly detect any misuse and immediately revoke compromised keys.
+    </td>
+  </tr>
+</table>
 
 D. Click the **Cloud Shell** icon in the top bar (terminal icon) to open a browser-based terminal.  
    ![Cloud Shell](img/5_1-d.png)  
@@ -262,8 +267,13 @@ The telemetry server is now emitting simulated telemetry data using Server-Sent-
 service-URL/events		// service-URL - the last line displayed by "deploy"
 ```
 
-> aside positive
+<table>
+  <tr>
+    <td style="background-color: #e0ffe0;">
 The format of the streaming endpoint is of the form: `https://streaming-telemetry-server-${PROJECT_NUMBER}.${REGION}.run.app/events` Where `$PROJECT_NUMBER` and `$REGION` are set to their values for your specific server.
+    </td>
+  </tr>
+</table>
 
 **Test in a browser:** Visit this stream endpoint URL using Chrome.  You should see incoming streamed data in the browser, simulating data emitted by sensors on a racing car.
 
@@ -322,8 +332,13 @@ npm install
 npm run dev
 ```
 
-> aside positive
+<table>
+  <tr>
+    <td style="background-color: #e0ffe0;">
 “koru” is a symbol from the [Māori culture](https://en.wikipedia.org/wiki/Koru) in New Zealand.  It represents a new beginning. 
+    </td>
+  </tr>
+</table>
 
 ![VITE](img/vite.png)
 
@@ -537,8 +552,13 @@ Trust is not only about correctness. It is also about delivery. Advice that is t
 
 A trustable system must communicate well. The user experience is part of the trust architecture.
 
-> aside positive 
+<table>
+  <tr>
+    <td style="background-color: #e0ffe0;">
 In a production environment, you would typically assign distinct voices to each coach, rather than a single voice that changes its pitch and inflection.  However, using text-to-speech services requires a significant increase in the amount of tokens that flow over the network. If you use a production cloud account, you will be able to hear different types of coaches' voices.
+    </td>
+  </tr>
+</table>
 
 
 ## Review the End-to-End Architecture
@@ -614,8 +634,13 @@ gcloud run services delete streaming-telemetry-server \
 
 Remember to replace `us-central1` with the region you used when deploying, if necessary. Confirm when prompted.
 
-> aside positive 
+<table>
+  <tr>
+    <td style="background-color: #e0ffe0;">
 Optional:  Your container images, packages, and related artifacts are stored in the Artifact Registry.  To avoid storage charges for older, unused data, you should remove them to avoid unnecessary charges.  To remove data from the Artifact Registry, use the Cloud Console: Artifact Registry, then select the repository created by the deploy, and then delete the image or the repository.
+    </td>
+  </tr>
+</table>
 
 # 
 
