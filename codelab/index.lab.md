@@ -117,29 +117,25 @@ This architectural separation helps the system remain responsive while still sup
 In this small program, we have a reflex path and a strategy path implemented as Python functions.
 
 ```ts
-const telemetry = {
-  speed: 147,
-  grip: 0.68,
-  corner_type: "sharp",
-  lap_trend: "entering_corners_too_fast",
-};
-
-function reflexPath(event: typeof telemetry): string {
-  if (event.grip < 0.70) {
-    return "REFLEX: Reduce throttle now";
-  }
-  return "REFLEX: No urgent issue";
+telemetry = {				# The data
+	"speed": 147,
+	"grip": 0.68,
+	"corner_type": "sharp",
+	"lap_trend": "entering_corners_too_fast"
 }
 
-function strategyPath(event: typeof telemetry): string {
-  if (event.lap_trend === "entering_corners_too_fast") {
-    return "STRATEGY: Brake earlier and prioritize corner exit";
-  }
-  return "STRATEGY: Driving pattern looks stable";
-}
+def reflex_path(event):		# Fast, immediate decision
+  if event["grip"] < 0.70:
+	return "REFLEX: Reduce throttle now"
+return "REFLEX: No urgent issue"
 
-console.log(reflexPath(telemetry));
-console.log(strategyPath(telemetry));
+def strategy_path(event):		# Slower, broader interpretation
+  if event["lap_trend"] == "entering_corners_too_fast":
+	return "STRATEGY: Brake earlier and prioritize corner exit"
+return "STRATEGY: Driving pattern looks stable"
+
+print(reflex_path(telemetry))	# Same telemetry data 
+print(strategy_path(telemetry))	# Same telemetry data
 ```
 
 The two functions behave differently given the same telemetry data.  The reflex function is an immediate warning.  The strategy function gives us coaching advice based on rules.
