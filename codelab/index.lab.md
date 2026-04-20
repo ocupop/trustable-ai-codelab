@@ -165,7 +165,7 @@ In this section, you will create a simple telemetry stream for a virtual race ca
 A. Go to [Google Cloud Console](https://console.cloud.google.com).  
 B. Create a new project for this codelab.  Click on the project dropdown menu at the top.
 
-![Google Cloud Console](img/5_0.png)
+![Google Cloud Console](img/5_0-1.png)
 
 When creating a project, it’s a good opportunity to link the billing account:  
 ![Link Billing Account](img/5_1-1.png)
@@ -259,7 +259,7 @@ Note you may have to press 'Y' when prompted
 The telemetry server is now emitting simulated telemetry data using Server-Sent-Events (SSE) at an endpoint of the form :
 
 ```
-service-URL/events		// service-URL - the last line displayed by "deploy"
+*service-URL*/events		// service-URL - the last line displayed by "deploy"
 ```
 
 > aside positive
@@ -276,7 +276,7 @@ You can close the browser tab to terminate the connection.
 Now let’s test from the shell command line.
 
 ```shell
-curl -N service-URL/events		# Replace service-URL with actual deployment endpoint
+curl -N *service-URL*/events		# Replace service-URL with actual deployment endpoint
 ```
 
 You should see incoming streamed data in the cloud shell window. 
@@ -524,8 +524,8 @@ Near line 31, you will see the `systemPrompt` for “AJ”, who is very direct a
 ```ts
 systemPrompt: `You are AJ, a race engineer that is excessively polite. 
 	Use telemtry terminology.  Be actionable
-	Examples: 	"Lat G settling. please throttle", 
-				"Brake when its convenient."
+	Examples: "Lat G settling. please throttle", 
+              "Brake when its convenient."
 	Keep responses under 12 words. Never explain — just command.`
 ```
 
