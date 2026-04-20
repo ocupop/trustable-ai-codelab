@@ -538,8 +538,7 @@ Trust is not only about correctness. It is also about delivery. Advice that is t
 A trustable system must communicate well. The user experience is part of the trust architecture.
 
 > aside positive
-In a production environment, you would typically assign distinct voices to each coach, rather than a single voice that changes its pitch and inflection.  However, using text-to-speech services requires a significant increase in the amount of tokens that flow over the network. If you use a production cloud account, you will be able to hear different types of coaches' voices.
-
+In production, you would typically give each coach a distinct voice instead of using one voice that changes pitch and inflection. However, text to speech significantly increases the number of tokens sent over the network. That added cost can grow quickly and may consume your free credits. With a production cloud account, though, you can enable and hear different coach voices.
 
 ## Review the End-to-End Architecture
 
