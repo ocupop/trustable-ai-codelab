@@ -114,7 +114,7 @@ Trustable AI often needs both.
 
 This architectural separation helps the system remain responsive while still supporting richer AI-driven guidance. It also creates a clear place to introduce human-guided constraints and domain knowledge.
 
-In this small program, we have a reflex path and a strategy path implemented as Python functions.
+In this small program, we have a reflex path and a strategy path implemented as TypeScript functions.
 
 ```ts
 const telemetry = {
