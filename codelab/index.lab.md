@@ -239,7 +239,7 @@ You can find YOUR\_PROJECT\_ID in the list of Projects
 From the repo root (ie, make sure you are in the `trustable-ai-codelab` folder):
 
 ```shell
-gcloud run deploy streaming-telemetry-server \
+gcloud run deploy --verbosity=info streaming-telemetry-server \
   --source streaming-telemetry-server \
   --platform managed \
   --region us-central1 \
