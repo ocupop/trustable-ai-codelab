@@ -1,7 +1,7 @@
 ---
 id: trustable-at-100-mph
 summary: This codelab walks learners through building a racing coach simulator that combines real-time telemetry, LLM reasoning, and encoded human guidance to demonstrate how to create more trustable AI systems.
-authors: EXTERNA: Hemanth HM, Vikram Tiwari, Lynn Langit, Sebastian Gomez, Rabimba Karanjai, Alvaro Huanca Mamani, Peter Lubbers, Cody Nicoll, Frank Greco  GOOGLERS AJ Mirwani
+authors: EXTERNAL Hemanth HM, Vikram Tiwari, Lynn Langit, Sebastian Gomez, Rabimba Karanjai, Alvaro Huanca Mamani, Peter Lubbers, Cody Nicoll, Frank Greco  GOOGLERS AJ Mirwani
 categories: cloud, ai & machine learning
 tags: cloud, ai, llm, trustability, Vertex AI Studio, Gemini, machine learning
 duration: 0
