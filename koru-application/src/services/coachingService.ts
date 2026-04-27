@@ -68,8 +68,8 @@ export class CoachingService {
 
         // Humanize action name for display and TTS (e.g. TRAIL_BRAKE → "Trail brake")
         const text = this.humanizeAction(rule.action, frame);
-        // ⚡ PROBE 3 — hot path firing:
-        // console.log('⚡ HOT', { action: rule.action, text, coach: this.coachId });
+        // ⚡ PROBE 3 — reflex path firing:
+        //console.log('⚡ Reflex', { action: rule.action, text, coach: this.coachId });
         this.emit({ path: 'hot', action: rule.action, text });
         return;
       }
@@ -282,11 +282,11 @@ Give a short coaching instruction followed by a brief physics-based explanation.
       if (!res.ok) return;
       const data = await res.json();
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      // ☁️ PROBE 4 — cold path (Gemini) responding:
-      // console.log('☁️ COLD', { coach: coach.id, chars: text.length, preview: text.slice(0, 60) });
+      // ☁️ PROBE 4 — Strategy path (Gemini) responding:
+      //console.log('Strategy', { coach: coach.id, chars: text.length, preview: text.slice(0, 60) });
       if (text) this.emit({ path: 'cold', text });
     } catch (err) {
-      console.error('Cold path failed:', err);
+      console.error('Strategy path failed:', err);
     }
   }
 
